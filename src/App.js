@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './js/store';
 
 import PrimerComponente from './components/primer-componente/PrimerComponente';
+import SegundoComponente from './components/segundo-componente/SegundoComponente';
+import TercerComponente from './components/tercer-componente/TercerComponente';
+import HeaderComponent from './components/shared/header/Header';
 
 class App extends Component {
   constructor(props) {
     super(props);
     store.subscribe(this.handleChanges);
+    this.state = {
+      section: 1
+    }
   }
 
   handleChanges = () => {
     console.log(store.getState());
+    if(store.getState().section !== this.state.section){
+      this.setState((prevState, props) => ({
+        ...prevState,
+        section: store.getState().section
+    }));
+    }
   }
 
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-          <br />
-          <PrimerComponente />
+        <div>
+          <HeaderComponent />
+          { this.state.section === 1 && <PrimerComponente />}
+          { this.state.section === 2 && <SegundoComponente />}
+          { this.state.section === 3 && <TercerComponente />}
         </div>
       </Provider>
     );

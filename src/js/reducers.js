@@ -6,12 +6,14 @@ const initialState = {
         nombre: ''
     },
     firstData: {
-        campo1: '',
-        campo2: '',
+      nombre: '',
+      lastName: '',
+      email: '',
     },
     secondData: {
-        lista: [],
-        idItem: 0
+      empresa: '',
+      sueldo: '',
+      antiguedad: ''
     }
 };
 
@@ -26,6 +28,16 @@ function reducer(state = initialState, action){
             return {
                 ...state,
                 generalData: action.payload
+            }
+        case 'STORE_FIRST_DATA':
+            return {
+                ...state,
+                firstData: action.payload
+            }
+        case 'STORE_SECOND_DATA':
+            return {
+                ...state,
+                secondData: action.payload
             }
         default:
             return state;

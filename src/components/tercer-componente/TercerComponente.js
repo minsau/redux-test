@@ -1,44 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { storageFirstData, changeSection } from '../../js/actions';
+import { storageGeneralData, changeSection } from '../../js/actions';
 
 
-export class PrimerComponente extends Component {
+export class TercerComponente extends Component {
     componentDidMount() {
-      this.setData();
     }
 
     cambiarSeccion = () => {
-      this.storeData();
-      this.props.changeSection(2);
+      this.props.changeSection(1);
     }
-
-    storeData() {
-      const fields = {
-        nombre: '',
-        lastName: '',
-        email: ''
-      };
-      fields.nombre = document.getElementById('first_name').value;
-      fields.lastName = document.getElementById('last_name').value;
-      fields.email = document.getElementById('email').value;
-
-      this.props.setGeneralData(fields);
-    }
-
-    setData = () => {
-      if(this.props.firstData){
-        document.getElementById('first_name').value = this.props.firstData.nombre;
-        document.getElementById('last_name').value = this.props.firstData.lastName;
-        document.getElementById('email').value = this.props.firstData.email;
-
-        document.getElementById('last_name').focus();
-        document.getElementById('email').focus();
-        document.getElementById('first_name').focus();
-
-      }
-    }
-
+    
     render() {
         return (
           <div>
@@ -47,17 +19,17 @@ export class PrimerComponente extends Component {
               <div className="row">
                 <div className="input-field col s6">
                   <input placeholder="Placeholder" id="first_name" type="text" className="validate" />
-                  <label htmlFor="first_name">First Name</label>
+                  <label htmlFor="first_name">Tarjeta</label>
                 </div>
                 <div className="input-field col s6">
                   <input id="last_name" type="text" className="validate" />
-                  <label htmlFor="last_name">Last Name</label>
+                  <label htmlFor="last_name">Hipotecario</label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s12">
                   <input id="email" type="email" className="validate" />
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Auto</label>
                 </div>
               </div>
             </form>
@@ -76,16 +48,16 @@ export class PrimerComponente extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ...state
+      ...state
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setGeneralData: data => dispatch(storageFirstData(data)),
+        setGeneralData: data => dispatch(storageGeneralData(data)),
         changeSection: section => dispatch(changeSection(section))
     }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrimerComponente);
+export default connect(mapStateToProps, mapDispatchToProps)(TercerComponente);
